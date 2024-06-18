@@ -1,4 +1,5 @@
 #pragma once
+#include<iostream>
 
 void selectionSort(int arr[], int n);
 void selectionSort(int arr[], int n, long long& count_compare);
