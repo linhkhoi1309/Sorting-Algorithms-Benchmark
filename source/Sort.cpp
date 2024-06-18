@@ -1,12 +1,16 @@
 #include "Sort.h"
 
-void selectionSort(int arr[], int n) {
-    for (int i = 0; i < n - 1; ++i) {
-        //At this point, arr[0..i-1] is sorted, and its entries are smaller than those in arr[i..n-1].
+void selectionSort(int arr[], int n)
+{
+    for (int i = 0; i < n - 1; ++i)
+    {
+        // At this point, arr[0..i-1] is sorted, and its entries are smaller than those in arr[i..n-1].
         int min_idx = i;
         // Select the smallest entry in arr[i..n-1]
-        for (int j = i + 1; j < n; ++j) {
-            if (arr[j] < arr[min_idx]) {
+        for (int j = i + 1; j < n; ++j)
+        {
+            if (arr[j] < arr[min_idx])
+            {
                 min_idx = j;
             }
         }
@@ -14,14 +18,18 @@ void selectionSort(int arr[], int n) {
         swap(arr[i], arr[min_idx]);
     }
 }
-void selectionSort(int arr[], int n, long long& count_compare) {
+void selectionSort(int arr[], int n, long long &count_compare)
+{
     count_compare = 0;
-    for (int i = 0; i < n - 1; ++i) {
-        //At this point, arr[0..i-1] is sorted, and its entries are smaller than those in arr[i..n-1].
+    for (int i = 0; i < n - 1; ++i)
+    {
+        // At this point, arr[0..i-1] is sorted, and its entries are smaller than those in arr[i..n-1].
         int min_idx = i;
         // Select the smallest entry in arr[i..n-1]
-        for (int j = i + 1; j < n; ++j) {
-            if (++count_compare && arr[j] < arr[min_idx]) {
+        for (int j = i + 1; j < n; ++j)
+        {
+            if (++count_compare && arr[j] < arr[min_idx])
+            {
                 min_idx = j;
             }
         }
@@ -29,47 +37,61 @@ void selectionSort(int arr[], int n, long long& count_compare) {
         swap(arr[i], arr[min_idx]);
     }
 }
-void insertionSort(int arr[], int n) {
-    for (int i = 1; i < n; ++i) {
+void insertionSort(int arr[], int n)
+{
+    for (int i = 1; i < n; ++i)
+    {
         // Find the right position in the sorted region arr[0..i-1] for arr[i]; shift, if necessary, to make room
         int key = arr[i];
         int j = i - 1;
-        while (j >= 0 && arr[j] > key) {
+        while (j >= 0 && arr[j] > key)
+        {
             arr[j + 1] = arr[j];
             j--;
         }
         arr[j + 1] = key;
     }
 }
-void insertionSort(int arr[], int n, long long& count_compare) {
+void insertionSort(int arr[], int n, long long &count_compare)
+{
     count_compare = 0;
-    for (int i = 1; i < n; ++i) {
+    for (int i = 1; i < n; ++i)
+    {
         // Find the right position in the sorted region arr[0..i-1] for arr[i]; shift, if necessary, to make room
         int key = arr[i];
         int j = i - 1;
-        while (j >= 0 && ++count_compare && arr[j] > key) {
+        while (j >= 0 && ++count_compare && arr[j] > key)
+        {
             arr[j + 1] = arr[j];
             j--;
         }
         arr[j + 1] = key;
     }
 }
-void bubbleSort(int arr[], int n) {
-    for (int i = 0; i < n - 1; ++i) {
+void bubbleSort(int arr[], int n)
+{
+    for (int i = 0; i < n - 1; ++i)
+    {
         // Last i elements are already in place
-        for (int j = 0; j < n - i - 1; ++j) {
-            if (arr[j] > arr[j + 1]) {
+        for (int j = 0; j < n - i - 1; ++j)
+        {
+            if (arr[j] > arr[j + 1])
+            {
                 swap(arr[j], arr[j + 1]);
             }
         }
     }
 }
-void bubbleSort(int arr[], int n, long long& count_compare) {
+void bubbleSort(int arr[], int n, long long &count_compare)
+{
     count_compare = 0;
-    for (int i = 0; i < n - 1; ++i) {
+    for (int i = 0; i < n - 1; ++i)
+    {
         // Last i elements are already in place
-        for (int j = 0; j < n - i - 1; ++j) {
-            if (++count_compare && arr[j] > arr[j + 1]) {
+        for (int j = 0; j < n - i - 1; ++j)
+        {
+            if (++count_compare && arr[j] > arr[j + 1])
+            {
                 swap(arr[j], arr[j + 1]);
             }
         }
@@ -124,7 +146,8 @@ void shakerSort(int arr[], int n, long long &count_compare)
 void heapify(int start, int arr[], int n)
 {
     int leftChild = 2 * start + 1;
-    if (leftChild >= n) return;
+    if (leftChild >= n)
+        return;
     int largerChild = leftChild;
     int rightChild = 2 * start + 2;
     if (rightChild < n)
@@ -148,10 +171,11 @@ void heapSort(int arr[], int n)
     }
 }
 
-
-void heapify(int start, int arr[], int n, long long &count_compare){
+void heapify(int start, int arr[], int n, long long &count_compare)
+{
     int leftChild = 2 * start + 1;
-    if (leftChild >= n) return;
+    if (leftChild >= n)
+        return;
     int largerChild = leftChild;
     int rightChild = 2 * start + 2;
     if (rightChild < n)
@@ -178,9 +202,32 @@ void heapSort(int arr[], int n, long long &count_compare)
 
 void shellSort(int arr[], int n)
 {
+    for (int gap = n / 2; gap > 0; gap /= 2)
+    {
+        for (int i = gap; i < n; i += 1)
+        {
+            int temp = arr[i];
+            int j;
+            for (j = i; j >= gap && arr[j - gap] > temp; j -= gap)
+                arr[j] = arr[j - gap];
+            arr[j] = temp;
+        }
+    }
 }
+
 void shellSort(int arr[], int n, long long &count_compare)
 {
+    for (int gap = n / 2; gap > 0; gap /= 2)
+    {
+        for (int i = gap; i < n; i += 1)
+        {
+            int temp = arr[i];
+            int j;
+            for (j = i; j >= gap && ++count_compare && arr[j - gap] > temp; j -= gap)
+                arr[j] = arr[j - gap];
+            arr[j] = temp;
+        }
+    }
 }
 
 void merge(int arr[], int first, int mid, int last)
@@ -248,5 +295,3 @@ void mergeSort(int arr[], int first, int last, long long &count_compare)
         merge(arr, first, mid, last, count_compare);
     }
 }
-
-
