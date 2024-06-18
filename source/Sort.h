@@ -1,6 +1,7 @@
 #pragma once
 #include<iostream>
 #include <algorithm> 
+#include <cmath>
 
 using namespace std;
 
@@ -26,8 +27,8 @@ void heapSort(int arr[], int n, long long& count_compare);
 void mergeSort(int arr[], int n);
 void mergeSort(int arr[], int n, long long& count_compare);
 
-void quickSort(int arr[], int n);
-void quickSort(int arr[], int n, long long& count_compare);
+void quickSort(int arr[], int first, int last);
+void quickSort(int arr[], int first, int last, long long& count_compare);
 
 void countingSort(int arr[], int n);
 void countingSort(int arr[], int n, long long& count_compare);
