@@ -1,7 +1,9 @@
 #pragma once
+#include<iostream>
 #include <algorithm> 
 
 using namespace std;
+
 
 void selectionSort(int arr[], int n);
 void selectionSort(int arr[], int n, long long& count_compare);
