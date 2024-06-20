@@ -322,7 +322,6 @@ void quickSort(int arr[], int first, int last, long long &count_compare)
     int i = first, j = last;
     do
     {
-        count_compare++;
         while (++count_compare && arr[i] < pivot)
         {
             i++;
@@ -337,7 +336,7 @@ void quickSort(int arr[], int first, int last, long long &count_compare)
             i++;
             j--;
         }
-    } while (i <= j);
+    } while (++count_compare && i <= j);
     if (++count_compare && first < j)
     {
         quickSort(arr, first, j, count_compare);
@@ -385,42 +384,32 @@ void countingSort(int arr[], int n, long long &count_compare)
 {
     count_compare = 0;
     int maxVal = arr[0];
-    for (int i = 1; i < n; i++)
+    for (int i = 1;  ++count_compare && i < n; i++)
     {
-        ++count_compare;
         if (++count_compare && arr[i] > maxVal)
         {
             maxVal = arr[i];
         }
     }
-    ++count_compare;
     int *f = new int[maxVal + 1];
-    for (int i = 0; i < n; i++)
+    for (int i = 0;  ++count_compare && i < n; i++)
     {
-        ++count_compare;
         f[arr[i]]++;
     }
-    ++count_compare;
-    for (int i = 1; i <= maxVal; i++)
+    for (int i = 1;  ++count_compare && i <= maxVal; i++)
     {
-        ++count_compare;
         f[i] = f[i - 1] + f[i];
     }
-    ++count_compare;
     int *temp = new int[n];
-    for (int j = n - 1; j >= 0; j--)
+    for (int j = n - 1;  ++count_compare && j >= 0; j--)
     {
-        ++count_compare;
         temp[f[arr[j]] - 1] = arr[j];
         f[arr[j]]--;
     }
-    ++count_compare;
-    for (int h = 0; h < n; h++)
+    for (int h = 0; ++count_compare && h < n; h++)
     {
-        ++count_compare;
         arr[h] = temp[h];
     }
-    ++count_compare;
     delete[] f;
     delete[] temp;
 }
@@ -481,61 +470,46 @@ void radixSort(int arr[], int n, long long &count_compare)
 {
     count_compare = 0;
     int maxVal = arr[0];
-    for (int i = 1; i < n; ++i)
+    for (int i = 1;  ++count_compare && i < n; ++i)
     {
-        ++count_compare;
-        if (arr[i] > maxVal)
+        if (  ++count_compare && arr[i] > maxVal)
             maxVal = arr[i];
     }
-    ++count_compare;
     int digits = 0;
     int div;
     do
     {
-        ++count_compare;
         digits++;
         div = maxVal / pow(10, digits);
-    } while (div > 0);
+    } while (  ++count_compare && div > 0);
 
     int *tempArr[10];
-    for (int i = 0; i < 10; i++)
+    for (int i = 0; ++count_compare && i < 10; i++)
     {
-        ++count_compare;
         tempArr[i] = new int[n];
     }
-    ++count_compare;
     int tempCount[10];
-    for (int i = 0; i < digits; ++i)
+    for (int i = 0;  ++count_compare && i < digits; ++i)
     {
-        ++count_compare;
         int exp = pow(10, i);
-        for (int j = 0; j < 10; ++j)
+        for (int j = 0;  ++count_compare && j < 10; ++j)
         {
-            ++count_compare;
             tempCount[j] = 0;
         }
-        ++count_compare;
-        for (int j = 0; j < n; ++j)
+        for (int j = 0;  ++count_compare && j < n; ++j)
         {
-            ++count_compare;
             int idx = (arr[j] / exp) % 10;
             tempArr[idx][tempCount[idx]++] = arr[j];
         }
-        ++count_compare;
         int idx = 0;
-        for (int j = 0; j < 10; ++j)
+        for (int j = 0;  ++count_compare && j < 10; ++j)
         {
-            ++count_compare;
-            for (int k = 0; k < tempCount[j]; ++k)
+            for (int k = 0;  ++count_compare && k < tempCount[j]; ++k)
             {
-                ++count_compare;
                 arr[idx++] = tempArr[j][k];
             }
-            ++count_compare;
         }
-        ++count_compare;
     }
-    ++count_compare;
     for (int i = 0; i < 10; i++)
     {
         delete[] tempArr[i];
@@ -601,19 +575,17 @@ void flashSort(int arr[], int n)
 
 void flashSort(int arr[], int n, long long &count_compare)
 {
+    count_compare = 0;
     int minVal = arr[0];
     int maxInd = 0;
     int m = int(0.45 * n);
     int *l = new int[m];
-    for (int i = 0; i < m; i++)
+    for (int i = 0;  ++count_compare && i < m; i++)
     {
-        ++count_compare;
         l[i] = 0;
     }
-    ++count_compare;
-    for (int i = 1; i < n; i++)
+    for (int i = 1;  ++count_compare && i < n; i++)
     {
-        ++count_compare;
         if (++count_compare && arr[i] < minVal)
         {
             minVal = arr[i];
@@ -623,24 +595,19 @@ void flashSort(int arr[], int n, long long &count_compare)
             maxInd = i;
         }
     }
-    ++count_compare;
     if (++count_compare && arr[maxInd] == minVal)
         return;
 
     double c1 = (double)(m - 1) / (arr[maxInd] - minVal);
-    for (int i = 0; i < n; i++)
+    for (int i = 0;  ++count_compare && i < n; i++)
     {
-        ++count_compare;
         int k = int(c1 * (arr[i] - minVal));
         ++l[k];
     }
-    ++count_compare;
-    for (int i = 1; i < m; i++)
+    for (int i = 1;  ++count_compare && i < m; i++)
     {
-        ++count_compare;
         l[i] += l[i - 1];
     }
-    ++count_compare;
     swap(arr[maxInd], arr[0]);
     int nmove = 0;
     int j = 0;
