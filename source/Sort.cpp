@@ -19,10 +19,10 @@ void selectionSort(int arr[], int n)
 void selectionSort(int arr[], int n, long long &count_compare)
 {
     count_compare = 0;
-    for (int i = 0; i < n - 1; ++i)
+    for (int i = 0;++count_compare && i < n - 1; ++i)
     {
         int min_idx = i;
-        for (int j = i + 1; j < n; ++j)
+        for (int j = i + 1;++count_compare && j < n; ++j)
         {
             if (++count_compare && arr[j] < arr[min_idx])
             {
@@ -51,12 +51,12 @@ void insertionSort(int arr[], int n)
 void insertionSort(int arr[], int n, long long &count_compare)
 {
     count_compare = 0;
-    for (int i = 1; i < n; ++i)
+    for (int i = 1;++count_compare && i < n; ++i)
     {
         // Find the right position in the sorted region arr[0..i-1] for arr[i]; shift, if necessary, to make room
         int key = arr[i];
         int j = i - 1;
-        while (j >= 0 && ++count_compare && arr[j] > key)
+        while (++count_compare && j >= 0 && ++count_compare && arr[j] > key)
         {
             arr[j + 1] = arr[j];
             j--;
@@ -81,10 +81,10 @@ void bubbleSort(int arr[], int n)
 void bubbleSort(int arr[], int n, long long &count_compare)
 {
     count_compare = 0;
-    for (int i = 0; i < n - 1; ++i)
+    for (int i = 0;++count_compare && i < n - 1; ++i)
     {
         // Last i elements are already in place
-        for (int j = 0; j < n - i - 1; ++j)
+        for (int j = 0;++count_compare && j < n - i - 1; ++j)
         {
             if (++count_compare && arr[j] > arr[j + 1])
             {
