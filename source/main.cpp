@@ -7,7 +7,7 @@ int main(int argc, char *argv[])
 {
     if (argc >= 5)
     {
-        // Algorithm mode
+    // Algorithm mode
         if (!strcmp(argv[1], "-a"))
         {
             if (argc == 6)
@@ -36,6 +36,5 @@ int main(int argc, char *argv[])
                 command4(argv[2], argv[3], argv[4]);
         }
     }
-
     return 0;
 }

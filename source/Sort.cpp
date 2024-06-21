@@ -19,10 +19,10 @@ void selectionSort(int arr[], int n)
 void selectionSort(int arr[], int n, long long &count_compare)
 {
     count_compare = 0;
-    for (int i = 0;++count_compare && i < n - 1; ++i)
+    for (int i = 0; ++count_compare && i < n - 1; ++i)
     {
         int min_idx = i;
-        for (int j = i + 1;++count_compare && j < n; ++j)
+        for (int j = i + 1; ++count_compare && j < n; ++j)
         {
             if (++count_compare && arr[j] < arr[min_idx])
             {
@@ -51,7 +51,7 @@ void insertionSort(int arr[], int n)
 void insertionSort(int arr[], int n, long long &count_compare)
 {
     count_compare = 0;
-    for (int i = 1;++count_compare && i < n; ++i)
+    for (int i = 1; ++count_compare && i < n; ++i)
     {
         // Find the right position in the sorted region arr[0..i-1] for arr[i]; shift, if necessary, to make room
         int key = arr[i];
@@ -81,10 +81,10 @@ void bubbleSort(int arr[], int n)
 void bubbleSort(int arr[], int n, long long &count_compare)
 {
     count_compare = 0;
-    for (int i = 0;++count_compare && i < n - 1; ++i)
+    for (int i = 0; ++count_compare && i < n - 1; ++i)
     {
         // Last i elements are already in place
-        for (int j = 0;++count_compare && j < n - i - 1; ++j)
+        for (int j = 0; ++count_compare && j < n - i - 1; ++j)
         {
             if (++count_compare && arr[j] > arr[j + 1])
             {
@@ -231,7 +231,7 @@ void merge(int arr[], int first, int mid, int last)
     int first1 = first, last1 = mid;
     int first2 = mid + 1, last2 = last;
 
-    int tempArr[last + 1];
+    int* tempArr = new int[last + 1];
     int index = first1;
     while ((first1 <= last1) && (first2 <= last2))
     {
@@ -246,6 +246,7 @@ void merge(int arr[], int first, int mid, int last)
         tempArr[index++] = arr[first2++];
     for (index = first; index <= last; ++index)
         arr[index] = tempArr[index];
+    delete [] tempArr;
 }
 
 void mergeSort(int arr[], int first, int last)
@@ -264,7 +265,7 @@ void merge(int arr[], int first, int mid, int last, long long &count_compare)
     int first1 = first, last1 = mid;
     int first2 = mid + 1, last2 = last;
 
-    int tempArr[last + 1];
+    int* tempArr = new int[last + 1];
     int index = first1;
     while (++count_compare && (first1 <= last1) && ++count_compare && (first2 <= last2))
     {
@@ -279,6 +280,7 @@ void merge(int arr[], int first, int mid, int last, long long &count_compare)
         tempArr[index++] = arr[first2++];
     for (index = first; ++count_compare && index <= last; ++index)
         arr[index] = tempArr[index];
+    delete [] tempArr;
 }
 
 void mergeSort(int arr[], int first, int last, long long &count_compare)
@@ -384,7 +386,7 @@ void countingSort(int arr[], int n, long long &count_compare)
 {
     count_compare = 0;
     int maxVal = arr[0];
-    for (int i = 1;  ++count_compare && i < n; i++)
+    for (int i = 1; ++count_compare && i < n; i++)
     {
         if (++count_compare && arr[i] > maxVal)
         {
@@ -392,16 +394,16 @@ void countingSort(int arr[], int n, long long &count_compare)
         }
     }
     int *f = new int[maxVal + 1];
-    for (int i = 0;  ++count_compare && i < n; i++)
+    for (int i = 0; ++count_compare && i < n; i++)
     {
         f[arr[i]]++;
     }
-    for (int i = 1;  ++count_compare && i <= maxVal; i++)
+    for (int i = 1; ++count_compare && i <= maxVal; i++)
     {
         f[i] = f[i - 1] + f[i];
     }
     int *temp = new int[n];
-    for (int j = n - 1;  ++count_compare && j >= 0; j--)
+    for (int j = n - 1; ++count_compare && j >= 0; j--)
     {
         temp[f[arr[j]] - 1] = arr[j];
         f[arr[j]]--;
@@ -470,9 +472,9 @@ void radixSort(int arr[], int n, long long &count_compare)
 {
     count_compare = 0;
     int maxVal = arr[0];
-    for (int i = 1;  ++count_compare && i < n; ++i)
+    for (int i = 1; ++count_compare && i < n; ++i)
     {
-        if (  ++count_compare && arr[i] > maxVal)
+        if (++count_compare && arr[i] > maxVal)
             maxVal = arr[i];
     }
     int digits = 0;
@@ -481,7 +483,7 @@ void radixSort(int arr[], int n, long long &count_compare)
     {
         digits++;
         div = maxVal / pow(10, digits);
-    } while (  ++count_compare && div > 0);
+    } while (++count_compare && div > 0);
 
     int *tempArr[10];
     for (int i = 0; ++count_compare && i < 10; i++)
@@ -489,22 +491,22 @@ void radixSort(int arr[], int n, long long &count_compare)
         tempArr[i] = new int[n];
     }
     int tempCount[10];
-    for (int i = 0;  ++count_compare && i < digits; ++i)
+    for (int i = 0; ++count_compare && i < digits; ++i)
     {
         int exp = pow(10, i);
-        for (int j = 0;  ++count_compare && j < 10; ++j)
+        for (int j = 0; ++count_compare && j < 10; ++j)
         {
             tempCount[j] = 0;
         }
-        for (int j = 0;  ++count_compare && j < n; ++j)
+        for (int j = 0; ++count_compare && j < n; ++j)
         {
             int idx = (arr[j] / exp) % 10;
             tempArr[idx][tempCount[idx]++] = arr[j];
         }
         int idx = 0;
-        for (int j = 0;  ++count_compare && j < 10; ++j)
+        for (int j = 0; ++count_compare && j < 10; ++j)
         {
-            for (int k = 0;  ++count_compare && k < tempCount[j]; ++k)
+            for (int k = 0; ++count_compare && k < tempCount[j]; ++k)
             {
                 arr[idx++] = tempArr[j][k];
             }
@@ -580,11 +582,11 @@ void flashSort(int arr[], int n, long long &count_compare)
     int maxInd = 0;
     int m = int(0.45 * n);
     int *l = new int[m];
-    for (int i = 0;  ++count_compare && i < m; i++)
+    for (int i = 0; ++count_compare && i < m; i++)
     {
         l[i] = 0;
     }
-    for (int i = 1;  ++count_compare && i < n; i++)
+    for (int i = 1; ++count_compare && i < n; i++)
     {
         if (++count_compare && arr[i] < minVal)
         {
@@ -599,12 +601,12 @@ void flashSort(int arr[], int n, long long &count_compare)
         return;
 
     double c1 = (double)(m - 1) / (arr[maxInd] - minVal);
-    for (int i = 0;  ++count_compare && i < n; i++)
+    for (int i = 0; ++count_compare && i < n; i++)
     {
         int k = int(c1 * (arr[i] - minVal));
         ++l[k];
     }
-    for (int i = 1;  ++count_compare && i < m; i++)
+    for (int i = 1; ++count_compare && i < m; i++)
     {
         l[i] += l[i - 1];
     }
@@ -635,4 +637,103 @@ void flashSort(int arr[], int n, long long &count_compare)
     insertionSort(arr, n, count_temp);
     count_compare += count_temp;
     delete[] l;
+}
+
+double measureSelectionSort(int *arr, int n)
+{
+    clock_t start, end;
+    start = clock();
+    selectionSort(arr, n);
+    end = clock();
+    return ((double)(end - start) / CLOCKS_PER_SEC) * 1000.0;
+}
+
+double measureInsertionSort(int *arr, int n)
+{
+    clock_t start, end;
+    start = clock();
+    insertionSort(arr, n);
+    end = clock();
+    return ((double)(end - start) / CLOCKS_PER_SEC) * 1000.0;
+}
+
+double measureBubbleSort(int *arr, int n)
+{
+    clock_t start, end;
+    start = clock();
+    bubbleSort(arr, n);
+    end = clock();
+    return ((double)(end - start) / CLOCKS_PER_SEC) * 1000.0;
+}
+
+double measureShakerSort(int *arr, int n)
+{
+    clock_t start, end;
+    start = clock();
+    shakerSort(arr, n);
+    end = clock();
+    return ((double)(end - start) / CLOCKS_PER_SEC) * 1000.0;
+}
+
+double measureShellSort(int *arr, int n)
+{
+    clock_t start, end;
+    start = clock();
+    shellSort(arr, n);
+    end = clock();
+    return ((double)(end - start) / CLOCKS_PER_SEC) * 1000.0;
+}
+
+double measureHeapSort(int *arr, int n)
+{
+    clock_t start, end;
+    start = clock();
+    heapSort(arr, n);
+    end = clock();
+    return ((double)(end - start) / CLOCKS_PER_SEC) * 1000.0;
+}
+
+double measureMergeSort(int *arr, int n)
+{
+    clock_t start, end;
+    start = clock();
+    mergeSort(arr, 0, n - 1);
+    end = clock();
+    return ((double)(end - start) / CLOCKS_PER_SEC) * 1000.0;
+}
+
+double measureQuickSort(int *arr, int n)
+{
+    clock_t start, end;
+    start = clock();
+    quickSort(arr, 0, n - 1);
+    end = clock();
+    return ((double)(end - start) / CLOCKS_PER_SEC) * 1000.0;
+}
+
+double measureCountingSort(int *arr, int n)
+{
+    clock_t start, end;
+    start = clock();
+    countingSort(arr, n);
+    end = clock();
+    return ((double)(end - start) / CLOCKS_PER_SEC) * 1000.0;
+}
+
+double measureRadixSort(int *arr, int n)
+{
+    clock_t start, end;
+    start = clock();
+    radixSort(arr, n);
+    end = clock();
+    return ((double)(end - start) / CLOCKS_PER_SEC) * 1000.0;
+}
+
+double measureFlashSort(int *arr, int n)
+{
+    clock_t start, end;
+    start = clock();
+    radixSort(arr, n);
+    end = clock();
+    return ((double)(end - start) / CLOCKS_PER_SEC) * 1000.0;
 }

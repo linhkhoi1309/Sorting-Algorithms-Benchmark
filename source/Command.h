@@ -1,9 +1,11 @@
 #pragma once
-#include <time.h>
 #include <cstring>
 #include <fstream>
+#include <iostream>
 #include "DataGenerator.h"
 #include "Sort.h"
+
+void findSortFuncAndCalculate(int *arr, int n, char algorithm[], char output_param[], long long &count_compare, double &time_measure);
  
 void command1(char algorithm [] , char input_file [], char output_param[]);
 
@@ -15,6 +17,3 @@ void command4(char algorithm1 [], char algorithm2 [], char input_file []);
 
 void command5(char algorithm1 [], char algorithm2 [], int input_size, char input_order[]);
 
-
-double measureTime(int *arr, int n, void (*sortingFunc)(int *, int));
-double measureTime(int *arr, int n, void (*sortingFunc)(int *, int, int)); // for recursive func
