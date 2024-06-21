@@ -286,8 +286,134 @@ void command3(char algorithm[], int input_size, char output_param[])
 
 void command4(char algorithm1[], char algorithm2[], char input_file[])
 {
+    ifstream fIn;
+    fIn.open(input_file);
+    if (!fIn.is_open())
+    {
+        cout << "File cannot be opened";
+        return;
+    }
+
+    int n;
+    fIn >> n;
+    int * arr = new int[n];
+    int i;
+    for (i = 0; i < n; i++)
+        fIn >> arr[i];
+    fIn.close();
+
+    int *tempArr = new int[n];
+    for (i = 0; i < n; i++)
+        tempArr[i] = arr[i];
+
+    char *algoname1 = new char[strlen(algorithm1) - 4]();
+    i = 0;
+    while ( algorithm1[i] != '-' )
+    {
+        algoname1[i] = algorithm1[i];
+        i++;
+    }
+    
+    char *algoname2 = new char[strlen(algorithm2) - 4]();
+    i = 0;
+    while ( algorithm2[i] != '-' )
+    {
+        algoname2[i] = algorithm2[i];
+        i++;
+    }
+
+    std::cout << "COMPARE M0DE" << std::endl;
+    std::cout << "Algorithm: " << algoname1 << " sort | " << algoname2 << " sort\n";
+    std::cout << "Input flie: " << input_file << std::endl;
+    std::cout << "Input size: " << n << std::endl;
+    std::cout << "-------------------------------\n";
+
+    double time_measure1 = -1, time_measure2 = -1;
+    long long count_compare1 = -1, count_compare2 = -1;
+
+    findSortFuncAndCalculate(arr, n, algorithm1, "-both" , count_compare1, time_measure1);
+    findSortFuncAndCalculate(tempArr, n, algorithm2, "-both", count_compare2, time_measure2);
+
+    std::cout << "Running time: " << time_measure1 << " ms | " << time_measure2  << " ms\n";
+    std::cout << "Comparisions: " << count_compare1 << " | " << count_compare2  << std::endl;
+
+    delete[] algoname1;
+    delete[] algoname2;
+    delete[] tempArr;
+    delete[] arr;
+
 }
 
 void command5(char algorithm1[], char algorithm2[], int input_size, char input_order[])
-{
+{ 
+    int i;
+    char *algoname1 = new char[strlen(algorithm1) - 4]();
+    i = 0;
+    while ( algorithm1[i] != '-' )
+    {
+        algoname1[i] = algorithm1[i];
+        i++;
+    }
+    
+    char *algoname2 = new char[strlen(algorithm2) - 4]();
+    i = 0;
+    while ( algorithm2[i] != '-' )
+    {
+        algoname2[i] = algorithm2[i];
+        i++;
+    }
+
+    std::cout << "COMPARE M0DE" << std::endl;
+    std::cout << "Algorithm: " << algoname1 << " sort | " << algoname2 << " sort\n";
+    std::cout << "Input size: " << input_size << std::endl;
+    std::cout << "Input order: ";
+
+    int *arr = new int[input_size];
+    if ( !strcmp (input_order, "-rand") )
+    {
+        GenerateRandomData(arr,input_size);
+        std::cout << "Randomized data" << std::endl;
+    }
+    else if ( !strcmp( input_order, "-nsorted") )
+    {
+        GenerateNearlySortedData(arr, input_size);
+        std::cout << "Nearly sorted data" << std::endl;
+    }
+    else if ( !strcmp( input_order, "-sorted") )
+    {
+        GenerateSortedData(arr,input_size);
+        std::cout << "Sorted data" << std::endl;
+    }
+    else if ( !strcmp ( input_order, "-rev") )
+    {
+        GenerateReverseData(arr,input_size);
+        std::cout << "Reverse sorted data" << std::endl;
+    }
+    std::cout << "-------------------------------------\n";
+
+    ofstream fOut;
+    fOut.open("intput.txt");
+    fOut << input_size << "\n";
+    int * tempArr = new int[input_size];
+    for ( i = 0; i < input_size; i++)
+    {
+        fOut << arr[i] << " ";
+        tempArr[i] = arr[i];
+    }
+    fOut.close();
+
+    double time_measure1 = -1, time_measure2 = -1;
+    long long count_compare1 = -1, count_compare2 = -1;
+
+    findSortFuncAndCalculate(arr, input_size, algorithm1, "-both" , count_compare1, time_measure1);
+    findSortFuncAndCalculate(tempArr, input_size, algorithm2, "-both", count_compare2, time_measure2);
+
+    std::cout << "Running time: " << time_measure1 << " ms | " << time_measure2  << " ms\n";
+    std::cout << "Comparisions: " << count_compare1 << " | " << count_compare2  << std::endl;
+
+    delete[] tempArr;
+    delete[] arr;
+    delete[] algoname2;
+    delete[] algoname1;
+
 }
