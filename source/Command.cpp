@@ -1,6 +1,6 @@
 #include "Command.h"
 
-// Hàm dùng để tìm thuật toán sort theo tên và trả về số comparison và thời gian chạy tương ứng 
+// Hàm dùng để tìm thuật toán sort theo tên và trả về số comparison và thời gian chạy tương ứng
 void findSortFuncAndCalculate(int *arr, int n, char algorithm[], char output_param[], long long &count_compare, double &time_measure)
 {
     if (!strcmp(algorithm, "selection-sort"))
@@ -242,8 +242,16 @@ void command1(char algorithm[], char input_file[], char output_param[])
         fIn >> arr[i];
     fIn.close();
 
+    char *algoName = new char[strlen(algorithm) + 1]();
+    for (int i = 0; i < strlen(algorithm); i++)
+    {
+        algoName[i] = algorithm[i];
+        if (algoName[i] == '-')
+            algoName[i] = ' ';
+    }
+
     cout << "ALGORITHM MODE" << endl;
-    cout << "Algorithm: ";
+    cout << "Algorithm: " << algoName << endl;
     cout << "Input file: " << input_file << endl;
     cout << "Input size: " << n << endl;
     cout << "----------------------" << endl;
@@ -268,18 +276,18 @@ void command1(char algorithm[], char input_file[], char output_param[])
     delete[] arr;
 }
 
-void command2(char algorithm [] , int input_size, char input_order [], char output_param[]){
-
+void command2(char algorithm[], int input_size, char input_order[], char output_param[])
+{
 }
 
-void command3(char algorithm [], int input_size, char output_param[]){
-
+void command3(char algorithm[], int input_size, char output_param[])
+{
 }
 
-void command4(char algorithm1 [], char algorithm2 [], char input_file []){
-
+void command4(char algorithm1[], char algorithm2[], char input_file[])
+{
 }
 
-void command5(char algorithm1 [], char algorithm2 [], int input_size, char input_order[]){
-    
+void command5(char algorithm1[], char algorithm2[], int input_size, char input_order[])
+{
 }
