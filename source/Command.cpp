@@ -131,10 +131,12 @@ void findSortFuncAndCalculate(int *arr, int n, char algorithm[], char output_par
         }
         else if (!strcmp(output_param, "-comp"))
         {
+            count_compare = 0;
             mergeSort(arr, 0, n - 1, count_compare);
         }
         else if (!strcmp(output_param, "-both"))
         {
+            count_compare = 0;
             int *tmp = new int[n];
             for (int i = 0; i < n; i++)
                 tmp[i] = arr[i];
@@ -151,10 +153,12 @@ void findSortFuncAndCalculate(int *arr, int n, char algorithm[], char output_par
         }
         else if (!strcmp(output_param, "-comp"))
         {
+            count_compare = 0;
             quickSort(arr, 0, n - 1, count_compare);
         }
         else if (!strcmp(output_param, "-both"))
         {
+            count_compare = 0;
             int *tmp = new int[n];
             for (int i = 0; i < n; i++)
                 tmp[i] = arr[i];
@@ -387,7 +391,7 @@ void command3(char algorithm[], int input_size, char output_param[])
         cout << "----------------------" << endl;
         //Write the generated input
         char input_file[20];
-        sprintf_s(input_file, "input_%d.txt", i + 1);
+        sprintf(input_file, "input_%d.txt", i + 1);
         ofstream fOut(input_file);
         fOut << input_size << '\n';
         for (int i = 0; i < input_size; i++)
@@ -449,7 +453,7 @@ void command4(char algorithm1[], char algorithm2[], char input_file[])
         i++;
     }
 
-    std::cout << "COMPARE M0DE" << std::endl;
+    std::cout << "COMPARE MODE" << std::endl;
     std::cout << "Algorithm: " << algoname1 << " sort | " << algoname2 << " sort\n";
     std::cout << "Input flie: " << input_file << std::endl;
     std::cout << "Input size: " << n << std::endl;
@@ -491,7 +495,7 @@ void command5(char algorithm1[], char algorithm2[], int input_size, char input_o
         i++;
     }
 
-    std::cout << "COMPARE M0DE" << std::endl;
+    std::cout << "COMPARE MODE" << std::endl;
     std::cout << "Algorithm: " << algoname1 << " sort | " << algoname2 << " sort\n";
     std::cout << "Input size: " << input_size << std::endl;
     std::cout << "Input order: ";

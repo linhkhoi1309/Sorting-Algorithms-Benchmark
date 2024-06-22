@@ -213,6 +213,7 @@ void shellSort(int arr[], int n)
 
 void shellSort(int arr[], int n, long long &count_compare)
 {
+    count_compare = 0;
     for (int gap = n / 2; ++count_compare && gap > 0; gap /= 2)
     {
         for (int i = gap; ++count_compare && i < n; i += 1)
@@ -319,7 +320,6 @@ void quickSort(int arr[], int first, int last)
 
 void quickSort(int arr[], int first, int last, long long &count_compare)
 {
-    count_compare = 0;
     int pivot = arr[(first + last) / 2];
     int i = first, j = last;
     do
