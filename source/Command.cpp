@@ -456,9 +456,10 @@ void command4(char algorithm1[], char algorithm2[], char input_file[])
 
     double time_measure1 = -1, time_measure2 = -1;
     long long count_compare1 = -1, count_compare2 = -1;
+    char output_param [6] = "-both";
 
-    findSortFuncAndCalculate(arr, n, algorithm1, "-both" , count_compare1, time_measure1);
-    findSortFuncAndCalculate(tempArr, n, algorithm2, "-both", count_compare2, time_measure2);
+    findSortFuncAndCalculate(arr, n, algorithm1, output_param , count_compare1, time_measure1);
+    findSortFuncAndCalculate(tempArr, n, algorithm2, output_param, count_compare2, time_measure2);
 
     std::cout << "Running time: " << time_measure1 << " ms | " << time_measure2  << " ms\n";
     std::cout << "Comparisions: " << count_compare1 << " | " << count_compare2  << std::endl;
@@ -530,9 +531,10 @@ void command5(char algorithm1[], char algorithm2[], int input_size, char input_o
 
     double time_measure1 = -1, time_measure2 = -1;
     long long count_compare1 = -1, count_compare2 = -1;
+    char output_param [6] = "-both";
 
-    findSortFuncAndCalculate(arr, input_size, algorithm1, "-both" , count_compare1, time_measure1);
-    findSortFuncAndCalculate(tempArr, input_size, algorithm2, "-both", count_compare2, time_measure2);
+    findSortFuncAndCalculate(arr, input_size, algorithm1, output_param , count_compare1, time_measure1);
+    findSortFuncAndCalculate(tempArr, input_size, algorithm2, output_param, count_compare2, time_measure2);
 
     std::cout << "Running time: " << time_measure1 << " ms | " << time_measure2  << " ms\n";
     std::cout << "Comparisions: " << count_compare1 << " | " << count_compare2  << std::endl;
