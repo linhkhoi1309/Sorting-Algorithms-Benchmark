@@ -277,11 +277,137 @@ void command1(char algorithm[], char input_file[], char output_param[])
 }
 
 void command2(char algorithm[], int input_size, char input_order[], char output_param[])
-{
+{	
+	char *algoName = new char[strlen(algorithm) + 1]();
+    for (int i = 0; i < strlen(algorithm); i++)
+    {
+        algoName[i] = algorithm[i];
+        if (algoName[i] == '-')
+            algoName[i] = ' ';
+    }
+    //Print prompt
+	cout << "ALGORITHM MODE" << endl;
+    cout << "Algorithm: " << algoName << endl;
+    cout << "Input size: " << input_size << endl;
+    cout << "Input order: ";
+    //Generate data
+	int *arr = new int[input_size];
+    if ( !strcmp (input_order, "-rand") )
+    {
+        GenerateRandomData(arr,input_size);
+        std::cout << "Randomized data" << std::endl;
+    }
+    else if ( !strcmp( input_order, "-nsorted") )
+    {
+        GenerateNearlySortedData(arr, input_size);
+        std::cout << "Nearly sorted data" << std::endl;
+    }
+    else if ( !strcmp( input_order, "-sorted") )
+    {
+        GenerateSortedData(arr,input_size);
+        std::cout << "Sorted data" << std::endl;
+    }
+    else if ( !strcmp ( input_order, "-rev") )
+    {
+        GenerateReverseData(arr,input_size);
+        std::cout << "Reverse sorted data" << std::endl;
+    }
+    cout << "----------------------" << endl;
+    //Write the generated input
+    ofstream fOut("input.txt");
+    fOut << input_size << '\n';
+    for (int i = 0; i < input_size; i++)
+        fOut << arr[i] << ' ';
+    fOut.close();
+
+    double time_measure = -1;
+    long long count_compare = -1;
+
+    findSortFuncAndCalculate(arr, input_size, algorithm, output_param , count_compare, time_measure);
+
+    if(time_measure != -1)
+        std::cout << "Running time: " << time_measure  << " ms\n";
+    if (count_compare != -1)
+    std::cout << "Comparisions: " << count_compare  << std::endl;
+
+    //Write the sorted array
+    fOut.open("output.txt");
+    fOut << input_size << '\n';
+    for (int i = 0; i < input_size; i++)
+        fOut << arr[i] << ' ';
+    fOut.close();
+
+	delete[] arr;
+	delete[] algoName;
 }
 
 void command3(char algorithm[], int input_size, char output_param[])
-{
+{   
+    char* algoName = new char[strlen(algorithm) + 1]();
+    for (int i = 0; i < strlen(algorithm); i++)
+    {
+        algoName[i] = algorithm[i];
+        if (algoName[i] == '-')
+            algoName[i] = ' ';
+    }
+    //Print prompt
+    cout << "ALGORITHM MODE" << endl;
+    cout << "Algorithm: " << algoName << endl;
+    cout << "Input size: " << input_size << endl << endl;
+    char Input_order[4][20] = {"-rand", "-nsorted", "-sorted", "-rev"};
+    int* arr = new int[input_size];
+    for (int i = 0; i < 4; i++) {
+
+        char* input_order = Input_order[i];
+        cout << "Input order: ";
+
+        //Generate data
+        
+        if (!strcmp(input_order, "-rand"))
+        {
+            GenerateRandomData(arr, input_size);
+            cout << "Randomized data" << endl;
+        }
+        else if (!strcmp(input_order, "-nsorted"))
+        {
+            GenerateNearlySortedData(arr, input_size);
+            cout << "Nearly sorted data" << endl;
+        }
+        else if (!strcmp(input_order, "-sorted"))
+        {
+            GenerateSortedData(arr, input_size);
+            cout << "Sorted data" << endl;
+        }
+        else if (!strcmp(input_order, "-rev"))
+        {
+            GenerateReverseData(arr, input_size);
+            cout << "Reverse sorted data" << endl;
+        }
+        cout << "----------------------" << endl;
+        //Write the generated input
+        char input_file[20];
+        sprintf_s(input_file, "input_%d.txt", i + 1);
+        ofstream fOut(input_file);
+        fOut << input_size << '\n';
+        for (int i = 0; i < input_size; i++)
+            fOut << arr[i] << ' ';
+        fOut.close();
+
+        double time_measure = -1;
+        long long count_compare = -1;
+
+        findSortFuncAndCalculate(arr, input_size, algorithm, output_param, count_compare, time_measure);
+
+        if (time_measure != -1)
+            std::cout << "Running time: " << time_measure << " ms\n";
+        if (count_compare != -1)
+            std::cout << "Comparisions: " << count_compare << endl;
+
+        cout << endl;
+
+    }
+    delete[] arr;
+    delete[] algoName;
 }
 
 void command4(char algorithm1[], char algorithm2[], char input_file[])
