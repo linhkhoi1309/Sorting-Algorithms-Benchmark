@@ -274,6 +274,7 @@ void command1(char algorithm[], char input_file[], char output_param[])
     fOut.close();
 
     delete[] arr;
+    delete[] algoName;
 }
 
 void command2(char algorithm[], int input_size, char input_order[], char output_param[])
@@ -292,7 +293,7 @@ void command2(char algorithm[], int input_size, char input_order[], char output_
     cout << "Input order: ";
     //Generate data
 	int *arr = new int[input_size];
-    if ( !strcmp (input_order, "-rand") )
+    if (!strcmp (input_order, "-rand") )
     {
         GenerateRandomData(arr,input_size);
         std::cout << "Randomized data" << std::endl;
