@@ -359,7 +359,7 @@ void countingSort(int arr[], int n)
             maxVal = arr[i];
         }
     }
-    int *f = new int[maxVal + 1];
+    int *f = new int[maxVal + 1]();
     for (int i = 0; i < n; i++)
     {
         f[arr[i]]++;
@@ -393,7 +393,7 @@ void countingSort(int arr[], int n, long long &count_compare)
             maxVal = arr[i];
         }
     }
-    int *f = new int[maxVal + 1];
+    int *f = new int[maxVal + 1]();
     for (int i = 0; ++count_compare && i < n; i++)
     {
         f[arr[i]]++;
