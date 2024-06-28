@@ -241,25 +241,112 @@ void shellSort(int arr[], int n, long long &count_compare)
 
 void merge(int arr[], int first, int mid, int last)
 {
-    int first1 = first, last1 = mid;
-    int first2 = mid + 1, last2 = last;
+    int const subArrOne = mid - first + 1;
+    int const subArrTwo = last - mid;
 
-    int *tempArr = new int[last + 1];
-    int index = first1;
-    while ((first1 <= last1) && (first2 <= last2))
+    // Create temp Arrs
+    int *leftArr = new int[subArrOne],
+        *rightArr = new int[subArrTwo];
+
+    // Copy data to temp Arrs leftArr[] and rightArr[]
+    for (int i = 0; i < subArrOne; i++)
+        leftArr[i] = arr[first + i];
+    for (int j = 0; j < subArrTwo; j++)
+        rightArr[j] = arr[mid + 1 + j];
+
+    int indexOfSubArrOne = 0, indexOfSubArrTwo = 0;
+    int indexOfMergedArr = first;
+
+    // Merge the temp Arrs back into Arr[left..right]
+    while (indexOfSubArrOne < subArrOne && indexOfSubArrTwo < subArrTwo)
     {
-        if (arr[first1] <= arr[first2])
-            tempArr[index++] = arr[first1++];
+        if (leftArr[indexOfSubArrOne] <= rightArr[indexOfSubArrTwo])
+        {
+            arr[indexOfMergedArr] = leftArr[indexOfSubArrOne];
+            indexOfSubArrOne++;
+        }
         else
-            tempArr[index++] = arr[first2++];
+        {
+            arr[indexOfMergedArr] = rightArr[indexOfSubArrTwo];
+            indexOfSubArrTwo++;
+        }
+        indexOfMergedArr++;
     }
-    while (first1 <= last1)
-        tempArr[index++] = arr[first1++];
-    while (first2 <= last2)
-        tempArr[index++] = arr[first2++];
-    for (index = first; index <= last; ++index)
-        arr[index] = tempArr[index];
-    delete[] tempArr;
+
+    // Copy the remaining elements of
+    // left[], if there are any
+    while (indexOfSubArrOne < subArrOne)
+    {
+        arr[indexOfMergedArr] = leftArr[indexOfSubArrOne];
+        indexOfSubArrOne++;
+        indexOfMergedArr++;
+    }
+
+    // Copy the remaining elements of
+    // right[], if there are any
+    while (indexOfSubArrTwo < subArrTwo)
+    {
+        arr[indexOfMergedArr] = rightArr[indexOfSubArrTwo];
+        indexOfSubArrTwo++;
+        indexOfMergedArr++;
+    }
+    delete[] leftArr;
+    delete[] rightArr;
+}
+
+void merge(int arr[], int first, int mid, int last, long long &count_compare)
+{
+    int const subArrOne = mid - first + 1;
+    int const subArrTwo = last - mid;
+
+    // Create temp Arrs
+    int *leftArr = new int[subArrOne],
+        *rightArr = new int[subArrTwo];
+
+    // Copy data to temp Arrs leftArr[] and rightArr[]
+    for (int i = 0; ++count_compare && i < subArrOne; i++)
+        leftArr[i] = arr[first + i];
+    for (int j = 0; ++count_compare && j < subArrTwo; j++)
+        rightArr[j] = arr[mid + 1 + j];
+
+    int indexOfSubArrOne = 0, indexOfSubArrTwo = 0;
+    int indexOfMergedArr = first;
+
+    // Merge the temp Arrs back into Arr[left..right]
+    while (++count_compare && indexOfSubArrOne < subArrOne && ++count_compare && indexOfSubArrTwo < subArrTwo)
+    {
+        if (++count_compare && leftArr[indexOfSubArrOne] <= rightArr[indexOfSubArrTwo])
+        {
+            arr[indexOfMergedArr] = leftArr[indexOfSubArrOne];
+            indexOfSubArrOne++;
+        }
+        else
+        {
+            arr[indexOfMergedArr] = rightArr[indexOfSubArrTwo];
+            indexOfSubArrTwo++;
+        }
+        indexOfMergedArr++;
+    }
+
+    // Copy the remaining elements of
+    // left[], if there are any
+    while (++count_compare && indexOfSubArrOne < subArrOne)
+    {
+        arr[indexOfMergedArr] = leftArr[indexOfSubArrOne];
+        indexOfSubArrOne++;
+        indexOfMergedArr++;
+    }
+
+    // Copy the remaining elements of
+    // right[], if there are any
+    while (++count_compare && indexOfSubArrTwo < subArrTwo)
+    {
+        arr[indexOfMergedArr] = rightArr[indexOfSubArrTwo];
+        indexOfSubArrTwo++;
+        indexOfMergedArr++;
+    }
+    delete[] leftArr;
+    delete[] rightArr;
 }
 
 void mergeSort(int arr[], int first, int last)
@@ -271,29 +358,6 @@ void mergeSort(int arr[], int first, int last)
         mergeSort(arr, mid + 1, last);
         merge(arr, first, mid, last);
     }
-}
-
-void merge(int arr[], int first, int mid, int last, long long &count_compare)
-{
-    int first1 = first, last1 = mid;
-    int first2 = mid + 1, last2 = last;
-
-    int *tempArr = new int[last + 1];
-    int index = first1;
-    while (++count_compare && (first1 <= last1) && ++count_compare && (first2 <= last2))
-    {
-        if (++count_compare && arr[first1] <= arr[first2])
-            tempArr[index++] = arr[first1++];
-        else
-            tempArr[index++] = arr[first2++];
-    }
-    while (++count_compare && first1 <= last1)
-        tempArr[index++] = arr[first1++];
-    while (++count_compare && first2 <= last2)
-        tempArr[index++] = arr[first2++];
-    for (index = first; ++count_compare && index <= last; ++index)
-        arr[index] = tempArr[index];
-    delete[] tempArr;
 }
 
 void mergeSort(int arr[], int first, int last, long long &count_compare)
