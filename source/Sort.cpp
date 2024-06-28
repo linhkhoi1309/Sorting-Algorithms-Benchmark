@@ -151,6 +151,12 @@ void heapify(int start, int arr[], int n)
         if (arr[rightChild] > arr[largerChild])
             largerChild = rightChild;
     }
+
+    if (arr[start] < arr[largerChild])
+    {
+        swap(arr[largerChild], arr[start]);
+        heapify(largerChild, arr, n);
+    }
 }
 
 void heapSort(int arr[], int n)
