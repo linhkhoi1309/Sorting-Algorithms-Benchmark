@@ -194,7 +194,7 @@ void heapSort(int arr[], int n, long long &count_compare)
         heapify(index, arr, n);
     swap(arr[0], arr[n - 1]);
     int heapSize = n - 1;
-    while (heapSize > 1)
+    while (++count_compare && heapSize > 1)
     {
         heapify(0, arr, heapSize, count_compare);
         heapSize--;
