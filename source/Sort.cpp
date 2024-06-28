@@ -440,10 +440,12 @@ void radixSort(int arr[], int n)
     }
     int digits = 0;
     int div;
+    int exp = 1;
     do
     {
         digits++;
-        div = maxVal / pow(10, digits);
+        exp *= 10;
+        div = maxVal / exp;
     } while (div > 0);
 
     int *tempArr[10];
@@ -452,9 +454,9 @@ void radixSort(int arr[], int n)
         tempArr[i] = new int[n];
     }
     int tempCount[10];
+    exp = 1;
     for (int i = 0; i < digits; ++i)
     {
-        int exp = pow(10, i);
         for (int j = 0; j < 10; ++j)
         {
             tempCount[j] = 0;
@@ -473,6 +475,7 @@ void radixSort(int arr[], int n)
                 arr[idx++] = tempArr[j][k];
             }
         }
+        exp *= 10;
     }
     for (int i = 0; i < 10; i++)
     {
@@ -491,10 +494,12 @@ void radixSort(int arr[], int n, long long &count_compare)
     }
     int digits = 0;
     int div;
+    int exp = 1;
     do
     {
         digits++;
-        div = maxVal / pow(10, digits);
+        exp *= 10;
+        div = maxVal / exp;
     } while (++count_compare && div > 0);
 
     int *tempArr[10];
@@ -503,9 +508,9 @@ void radixSort(int arr[], int n, long long &count_compare)
         tempArr[i] = new int[n];
     }
     int tempCount[10];
+    exp = 1;
     for (int i = 0; ++count_compare && i < digits; ++i)
     {
-        int exp = pow(10, i);
         for (int j = 0; ++count_compare && j < 10; ++j)
         {
             tempCount[j] = 0;
@@ -523,6 +528,7 @@ void radixSort(int arr[], int n, long long &count_compare)
                 arr[idx++] = tempArr[j][k];
             }
         }
+        exp *= 10;
     }
     for (int i = 0; i < 10; i++)
     {
