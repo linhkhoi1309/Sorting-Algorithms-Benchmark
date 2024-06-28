@@ -179,6 +179,12 @@ void heapify(int start, int arr[], int n, long long &count_compare)
         if (++count_compare && arr[rightChild] > arr[largerChild])
             largerChild = rightChild;
     }
+
+    if (++count_compare && arr[start] < arr[largerChild])
+    {
+        swap(arr[largerChild], arr[start]);
+        heapify(largerChild, arr, n, count_compare);
+    }
 }
 
 void heapSort(int arr[], int n, long long &count_compare)
@@ -232,7 +238,7 @@ void merge(int arr[], int first, int mid, int last)
     int first1 = first, last1 = mid;
     int first2 = mid + 1, last2 = last;
 
-    int* tempArr = new int[last + 1];
+    int *tempArr = new int[last + 1];
     int index = first1;
     while ((first1 <= last1) && (first2 <= last2))
     {
@@ -247,7 +253,7 @@ void merge(int arr[], int first, int mid, int last)
         tempArr[index++] = arr[first2++];
     for (index = first; index <= last; ++index)
         arr[index] = tempArr[index];
-    delete [] tempArr;
+    delete[] tempArr;
 }
 
 void mergeSort(int arr[], int first, int last)
@@ -266,7 +272,7 @@ void merge(int arr[], int first, int mid, int last, long long &count_compare)
     int first1 = first, last1 = mid;
     int first2 = mid + 1, last2 = last;
 
-    int* tempArr = new int[last + 1];
+    int *tempArr = new int[last + 1];
     int index = first1;
     while (++count_compare && (first1 <= last1) && ++count_compare && (first2 <= last2))
     {
@@ -281,7 +287,7 @@ void merge(int arr[], int first, int mid, int last, long long &count_compare)
         tempArr[index++] = arr[first2++];
     for (index = first; ++count_compare && index <= last; ++index)
         arr[index] = tempArr[index];
-    delete [] tempArr;
+    delete[] tempArr;
 }
 
 void mergeSort(int arr[], int first, int last, long long &count_compare)
