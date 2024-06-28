@@ -117,6 +117,7 @@ void conductExperiment()
             measure_time = measureMergeSort(tmpArr, data_sizes[j]);
             for (int k = 0; k < data_sizes[j]; k++)
                 tmpArr[k] = arr[k];
+            count_compare = 0;
             mergeSort(tmpArr, 0, data_sizes[j] - 1, count_compare);
 
             cout << "Merge sort" << endl;
@@ -129,6 +130,7 @@ void conductExperiment()
             measure_time = measureQuickSort(tmpArr, data_sizes[j]);
             for (int k = 0; k < data_sizes[j]; k++)
                 tmpArr[k] = arr[k];
+            count_compare = 0;
             quickSort(tmpArr, 0, data_sizes[j] - 1, count_compare);
 
             cout << "Quick sort" << endl;
