@@ -1,6 +1,7 @@
 #include <iostream>
 #include <cstring>
 #include <cctype>
+#include <cstdlib>
 #include "Command.h"
 
 int main(int argc, char *argv[])
