@@ -6,7 +6,7 @@
 
 int main(int argc, char *argv[])
 {
-    if (argc >= 5)
+    if (argc == 5 || argc == 6)
     {
     // Algorithm mode
         if (!strcmp(argv[1], "-a"))
